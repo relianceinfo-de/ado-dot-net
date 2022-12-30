@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Test_Azure_ADO_App.Models.Project>
+
+@{
+   
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+
+                    <th>Name</th>
+
+                    <th>LastUpdateTime</th>
+
+                    <th>Revision</th>
+
+                    <th>State</th>
+
+                    <th>Url</th>
+
+
+
+                    @*<th>CapabilitiesVersionControlGitEnabled</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.LastUpdateTime</td>
+                    <td>@item.Revision</td>
+                    <td>@item.State</td>
+                    <td>@item.Url</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

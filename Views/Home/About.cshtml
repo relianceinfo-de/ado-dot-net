@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Test_Azure_ADO_App.Models.Builds>
+
+@{
+    ViewBag.Title = "Builds";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>AgentSpecificationIdentifier</th>
+
+                    <th>BuildNumber</th>
+
+                    <th>BuildNumberRevision</th>
+
+                    @*<th>ControllerCreatedDate</th>*@
+
+                    <th>ControllerDescription</th>
+
+                    @*<th>ControllerEnabled</th>*@
+
+                    @*<th>ControllerId</th>*@
+
+
+
+                    @*<th>CapabilitiesVersionControlGitEnabled</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.AgentSpecificationIdentifier</td>
+                        <td>@item.BuildNumber</td>
+                        <td>@item.BuildNumberRevision</td>
+                        @*<td>@item.ControllerCreatedDate</td>*@
+                        <td>@item.ControllerDescription</td>
+                        @*<td>@item.ControllerEnabled</td>*@
+                        @*<td>@item.ControllerId</td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
