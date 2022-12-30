@@ -29,9 +29,9 @@ namespace Test_Azure_ADO_App.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            var result = LoadDataWorklist();
 
-            return View();
+            return View(result);
         }
 
         public List<Project> lstProjects = new List<Project>();
@@ -86,9 +86,19 @@ namespace Test_Azure_ADO_App.Controllers
                     build.AgentSpecificationIdentifier = Convert.ToString(rdr["AgentSpecificationIdentifier"]);
                     build.BuildNumber = Convert.ToString(rdr["BuildNumber"]);
                     build.BuildNumberRevision = Convert.ToInt32(rdr["BuildNumberRevision"]);
-                   // build.ControllerCreatedDate = Convert.ToDateTime(rdr["ControllerCreatedDate"]);
+                    //var contollerCreatedDate = rdr["ControllerCreatedDate"];
+                    //if (contollerCreatedDate != String.Empty)
+                    //{
+                    //    build.ControllerCreatedDate = Convert.ToDateTime(rdr["ControllerCreatedDate"]);
+                    //}
+
                     build.ControllerDescription = Convert.ToString(rdr["ControllerDescription"]);
-                    //build.ControllerEnabled = Convert.ToBoolean(rdr["ControllerEnabled"]);
+                    //var controllerEnabled = rdr["ControllerEnabled"];
+                    //if (controllerEnabled != null)
+                    //{
+                    //    build.ControllerEnabled = Convert.ToBoolean(rdr["ControllerEnabled"]);
+                    //}
+
                     //build.ControllerId = Convert.ToInt32(rdr["ControllerId"]);
 
                     //proj.CapabilitiesVersionControlGitEnabled = rdr["CapabilitiesVersionControlGitEnabled"] != null ? Convert.ToBoolean(rdr["CapabilitiesVersionControlGitEnabled"]) : false;
@@ -99,6 +109,44 @@ namespace Test_Azure_ADO_App.Controllers
                 rdr.Close();
 
                 return lstBuilds;
+
+            }
+        }
+
+        public List<WorkItems> lstWorklist = new List<WorkItems>();
+        public List<WorkItems> LoadDataWorklist()
+        {
+
+            using (AzureDevOpsConnection connection = new AzureDevOpsConnection($"AuthScheme=Basic;Organization=griffinv4;ProjectId=GriffinERP;PersonalAccessToken={PAT};"))
+            {
+                connection.Open();
+
+                AzureDevOpsCommand cmd = new AzureDevOpsCommand("SELECT * FROM WorkItems", connection);
+
+                AzureDevOpsDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    WorkItems wrklist = new WorkItems();
+                    wrklist.Id = Convert.ToInt32(rdr["Id"]);
+                    wrklist.LinksSelfHref = Convert.ToString(rdr["LinksSelfHref"]);
+                    wrklist.LinksFieldsHref = Convert.ToString(rdr["LinksFieldsHref"]);
+                    wrklist.LinksHtmlHref = Convert.ToString(rdr["LinksHtmlHref"]);
+                    wrklist.LinksWorkItemHistoryHref = Convert.ToString(rdr["LinksWorkItemHistoryHref"]);
+                    wrklist.LinksWorkItemRevisionsHref = Convert.ToString(rdr["LinksWorkItemRevisionsHref"]);
+                    wrklist.LinksWorkItemTypeHref = Convert.ToString(rdr["LinksWorkItemTypeHref"]);
+                    wrklist.LinksWorkItemUpdatesHref = Convert.ToString(rdr["LinksWorkItemUpdatesHref"]);
+                    //wrklist.Fields = Convert.ToString(rdr["Fields"]);
+                    wrklist.ProjectId = Convert.ToString(rdr["ProjectId"]);
+                    wrklist.Rev = Convert.ToInt32(rdr["Rev"]);
+                    wrklist.Url = Convert.ToString(rdr["Url"]);
+
+                    lstWorklist.Add(wrklist);
+                }
+
+                rdr.Close();
+
+                return lstWorklist;
 
             }
         }

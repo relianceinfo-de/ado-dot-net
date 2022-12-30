@@ -1,17 +1,57 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model IEnumerable<Test_Azure_ADO_App.Models.WorkItems>
+@{
+    ViewBag.Title = "Work Items";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div>
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+                @*<th>LinksSelfHref</th>
+
+                <th>LinksFieldsHref</th>
+
+                <th>LinksHtmlHref</th>
+
+                <th>LinksWorkItemHistoryHref</th>
+
+
+                <th>LinksWorkItemTypeHref</th>
+
+                <th>LinksWorkItemUpdatesHref</th>*@
+
+                @*<th>Fields</th>*@
+                <th>ProjectId</th>
+                <th>Rev</th>
+                <th>Url</th>
+
+
+
+                @*<th>CapabilitiesVersionControlGitEnabled</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    @*<td>@item.LinksSelfHref</td>
+                    <td>@item.LinksFieldsHref</td>
+                    <td>@item.LinksHtmlHref</td>
+                    <td>@item.LinksWorkItemHistoryHref</td>
+                    <td>@item.LinksWorkItemTypeHref</td>
+                    <td>@item.LinksWorkItemUpdatesHref</td>*@
+                    @*<td>@item.Fields</td>*@
+                    <td>@item.ProjectId</td>
+
+                    <td>@item.Rev</td>
+                    <td>@item.Url</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
