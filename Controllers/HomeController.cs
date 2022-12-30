@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using Test_Azure_ADO_App.Models;
 
-
 namespace Test_Azure_ADO_App.Controllers
 {
     public class HomeController : Controller
@@ -30,6 +29,13 @@ namespace Test_Azure_ADO_App.Controllers
         public ActionResult Contact()
         {
             var result = LoadDataWorklist();
+
+            return View(result);
+        }
+
+        public ActionResult Team()
+        {
+            var result = LoadDataTeams();
 
             return View(result);
         }
@@ -147,6 +153,48 @@ namespace Test_Azure_ADO_App.Controllers
                 rdr.Close();
 
                 return lstWorklist;
+
+            }
+        }
+
+        public List<Teams> lstTeams = new List<Teams>();
+        public List<Teams> LoadDataTeams()
+        {
+
+            using (AzureDevOpsConnection connection = new AzureDevOpsConnection($"AuthScheme=Basic;Organization=griffinv4;ProjectId=GriffinERP;PersonalAccessToken={PAT};"))
+            {
+                connection.Open();
+
+                AzureDevOpsCommand cmd = new AzureDevOpsCommand("SELECT * FROM Teams", connection);
+
+                AzureDevOpsDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Teams wrklist = new Teams();
+                    wrklist.Id = Convert.ToString(rdr["Id"]);
+                    wrklist.IdentityId = Convert.ToString(rdr["IdentityId"]);
+                    //wrklist.IdentityIsActive = Convert.ToBoolean(rdr["IdentityIsActive"]);
+                   // wrklist.IdentityIsContainer = Convert.ToBoolean(rdr["IdentityIsContainer"]);
+                    wrklist.IdentityMasterId = Convert.ToString(rdr["IdentityMasterId"]);
+                    //wrklist.IdentityMetaTypeId = Convert.ToInt32(rdr["IdentityMetaTypeId"]);
+                    wrklist.IdentityProviderDisplayName = Convert.ToString(rdr["IdentityProviderDisplayName"]);
+                    //wrklist.IdentityResourceVersion = Convert.ToInt32(rdr["IdentityResourceVersion"]);
+                    
+                    wrklist.IdentitySubjectDescriptor = Convert.ToString(rdr["IdentitySubjectDescriptor"]);
+                    wrklist.IdentityUrl = Convert.ToString(rdr["IdentityUrl"]);
+                    wrklist.Name = Convert.ToString(rdr["Name"]);
+                    wrklist.ProjectId = Convert.ToString(rdr["ProjectId"]);
+                    wrklist.ProjectName = Convert.ToString(rdr["ProjectName"]);
+                    wrklist.Url = Convert.ToString(rdr["Url"]);
+                    
+
+                    lstTeams.Add(wrklist);
+                }
+
+                rdr.Close();
+
+                return lstTeams;
 
             }
         }

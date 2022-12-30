@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Test_Azure_ADO_App.Models.Teams>
+
+@{
+    ViewBag.Title = "Teams";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+
+                    @*<th>Description</th>
+
+                    <th>IdentityId</th>*@
+
+                    <th>IdentityIsActive</th>
+
+                    <th>IdentityIsContainer</th>
+
+                    @*<th>IdentityMasterId</th>*@
+
+                    <th>IdentityMetaTypeId</th>
+
+                    @*<th>IdentityProviderDisplayName</th>*@
+
+                    <th>IdentityResourceVersion</th>
+
+                    @*<th>IdentitySubjectDescriptor</th>*@
+                    <th>IdentityUrl</th>
+
+                    <th>Name</th>
+
+                    <th>ProjectId</th>
+                  
+                    <th>ProjectName</th> 
+
+                    <th>Url</th>
+
+
+                    <th>CapabilitiesVersionControlGitEnabled</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    @*<td>@item.AgentSpecificationIdentifier</td>*@
+                    <td>@item.Id</td>
+                    @*<td>@item.Description</td>
+                    <td>@item.IdentityId</td>*@
+                    <td>@item.IdentityIsActive</td>
+                    <td>@item.IdentityIsContainer</td>
+                    @*<td>@item.IdentityMasterId</td>*@
+                    <td>@item.IdentityMetaTypeId</td>
+                    @*<td>@item.IdentityProviderDisplayName</td>*@
+                    <td>@item.IdentityResourceVersion</td>
+                    @*<td>@item.IdentitySubjectDescriptor</td>*@
+                    <td>@item.IdentityUrl</td>
+                    <td>@item.Name</td>
+                    <td>@item.ProjectId</td>
+                    <td>@item.ProjectName</td>
+                    <td>@item.Url</td>
+                   
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
